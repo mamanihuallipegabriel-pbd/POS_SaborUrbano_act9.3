@@ -17,9 +17,16 @@ def inicializar_bd():
     
     # TODO 1: Ejecuta la sentencia SQL para crear la tabla 'resumen_diario'
     # con las columnas: fecha TEXT PRIMARY KEY y monto_total REAL.
-    # Pista: usa CREATE TABLE IF NOT EXISTS resumen_diario (...)
+    # Pista: usa CREATE TABLE IF NOT EXISTS resumen_diario (...)  
     cursor.execute("""
-        -- ESCRIBE TU CONSULTA SQL AQUÍ
+    
+    
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS "resumen_diario" (
+    "fecha"	TEXT NOT NULL,
+    "monto_total"	REAL NOT NULL,
+    PRIMARY KEY("fecha"));
     """)
     
     conexion.commit()
