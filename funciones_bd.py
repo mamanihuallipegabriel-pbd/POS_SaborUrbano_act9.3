@@ -19,10 +19,6 @@ def inicializar_bd():
     # con las columnas: fecha TEXT PRIMARY KEY y monto_total REAL.
     # Pista: usa CREATE TABLE IF NOT EXISTS resumen_diario (...)  
     cursor.execute("""
-    
-    
-
-    cursor.execute("""
         CREATE TABLE IF NOT EXISTS "resumen_diario" (
     "fecha"	TEXT NOT NULL,
     "monto_total"	REAL NOT NULL,
@@ -40,7 +36,7 @@ def cargar_monto_diario():
     
     # TODO 2: Consulta el 'monto_total' de la tabla 'resumen_diario' donde fecha sea igual a 'hoy'.
     # Pista: cursor.execute("SELECT monto_total FROM resumen_diario WHERE fecha = ?", (hoy,))
-    
+    cursor.execute("SELECT monto_total FROM resumen_diario WHERE fecha = ?", (hoy,))
     fila = cursor.fetchone()
     
     if fila is not None:
@@ -49,9 +45,11 @@ def cargar_monto_diario():
         # TODO 3: Si no hay registro para hoy (fila is None), inserta una nueva fila
         # con la fecha de hoy y monto_total en 0.0, luego haz commit.
         # Pista: INSERT INTO resumen_diario (fecha, monto_total) VALUES (?, ?)
-        pass
-        monto = 0.0
-        
+        monto =0.0
+        cursor.execute ("INSERT INTO resumen_diario (fecha, monto_total) VALUES (?, ? )", (hoy, monto,))
+    
+    
+    conexion.commit()   
     conexion.close()
     return monto
 
@@ -63,6 +61,7 @@ def guardar_monto_diario(nuevo_monto):
     
     # TODO 4: Actualiza el campo 'monto_total' con 'nuevo_monto' para la fecha 'hoy'.
     # Pista: UPDATE resumen_diario SET monto_total = ? WHERE fecha = ?
+    cursor.execute("UPDATE resumen_diario SET monto_total = ? WHERE fecha = ?", (nuevo_monto, hoy, ))
     
     conexion.commit()
     conexion.close()

@@ -6,9 +6,10 @@ from funciones_interfaz import *
 from funciones_ventas import *
 
 def iniciar_caja():
-    monto_total_diario = cargar_monto_diario()
-    caja_abierta = True
     inicializar_bd ()
+    monto_total_diario = cargar_monto_diario()
+    print("su monto recuperado es : ",monto_total_diario)
+    caja_abierta = True
     while caja_abierta:
         opcion = mostrar_menu()
 
